@@ -11,3 +11,6 @@ php artisan make:migration criar_tabela_usuarios
 
 rodar uma migration
 php artisan migrate
+
+
+para manipular a tabela
