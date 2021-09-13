@@ -1,0 +1,1 @@
+para as views (html) elas ficaram localizadas na pasta resources/views/
