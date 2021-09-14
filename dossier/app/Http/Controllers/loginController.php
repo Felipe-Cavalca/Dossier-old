@@ -12,4 +12,5 @@ class loginController extends Controller  {
 
         return view('login');
     }
+
 } 
