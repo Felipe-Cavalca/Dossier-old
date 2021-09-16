@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,3 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [loginController::class, 'login']);
-
-Route::get('/home', [HomeController::class, 'home']);
-Route::get('/home/cadastro', [HomeController::class, 'cadastro']);
