@@ -10,7 +10,11 @@ class loginController extends Controller  {
 
         //logica do sistema
 
-        return view('login');
+        return view('deslogado/login');
+    }
+
+    public function recuperarSenha(){
+        return view('deslogado/recuperarSenha');
     }
 
 } 

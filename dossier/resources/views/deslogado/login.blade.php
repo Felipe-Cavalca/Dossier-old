@@ -1,5 +1,11 @@
 @extends ('templates/deslogado')
 
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}" media="screen"/>
+@endsection
+
+@section('js')
+@endsection
 
 @section('pagina')
 <form id="login">
@@ -17,14 +23,6 @@
         <label class="form-check-label" for="logado">Manter logado</label>
     </div>
     <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-    <a href="recupera-senha" class="btn btn-warning btn-lg">Esqueci a senha</a>
+    <a href="recuperar-senha" class="btn btn-warning btn-lg">Esqueci a senha</a>
 </form>
-@endsection
-
-
-@section('css')
-<link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}" media="screen"/>
-@endsection
-
-@section('js')
 @endsection

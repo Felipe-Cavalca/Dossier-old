@@ -15,3 +15,4 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::get('/', [loginController::class, 'login']);
+Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
