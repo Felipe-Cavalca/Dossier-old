@@ -14,5 +14,9 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+//rotas acessadas via get
 Route::get('/', [loginController::class, 'login']);
 Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
+
+//rotas acessadas via post
+Route::post('/', [loginController::class, 'logar']);

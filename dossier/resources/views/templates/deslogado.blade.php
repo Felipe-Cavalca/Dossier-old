@@ -1,5 +1,8 @@
 @extends ('templates/html')
 
+@section('css2')
+<link rel="stylesheet" type="text/css" href="{{asset('css/templates/deslogado.css')}}" media="screen"/>
+@endsection
 
 @section('body')
 <div class="container-fluid mt-5">
@@ -14,8 +17,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('css2')
-<link rel="stylesheet" type="text/css" href="{{asset('css/templates/deslogado.css')}}" media="screen"/>
 @endsection
