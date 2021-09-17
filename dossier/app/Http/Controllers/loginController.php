@@ -49,7 +49,7 @@ class loginController extends Controller  {
 
         if($email == "admin@sistema" && $senha == "123"){
             //fazer redirecionamento para a pagina de logado
-            echo 'foi';
+            return redirect('/secretario//');
         }else{
             echo 'erro';
             return redirect("/?erro=invalido&email=".$email."&check=".$check);

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\secretarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,9 @@ use App\Http\Controllers\LoginController;
 */
 
 //rotas acessadas via get
+//deslogado
 Route::get('/', [loginController::class, 'login']);
 Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
-
-//rotas acessadas via post
 Route::post('/', [loginController::class, 'logar']);
+//secretario
+Route::get('/secretario//', [secretarioController::class, 'arquivos']);

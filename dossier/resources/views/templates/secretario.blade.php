@@ -1,0 +1,26 @@
+@extends('templates/html')
+
+@section('cssTemplate')
+<link rel="stylesheet" type="text/css" href="{{asset('css/templates/secretario.css')}}" media="screen"/>
+@endsection
+
+@section('jsTemplate')
+@endsection
+
+@section('body')
+
+@switch($nav)
+    @case('esquerda')
+        @yield('nav-esquerda')
+        @break
+    @default
+        @yield('nav-topo')
+@endswitch
+
+<div class="card m-5 meio-pagina">
+    <div class="card-body">
+        @yield('pagina')
+    </div>
+</div>
+
+@endsection

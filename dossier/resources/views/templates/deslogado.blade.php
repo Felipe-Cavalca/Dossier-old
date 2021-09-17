@@ -1,7 +1,10 @@
 @extends ('templates/html')
 
-@section('css2')
+@section('cssTemplate')
 <link rel="stylesheet" type="text/css" href="{{asset('css/templates/deslogado.css')}}" media="screen"/>
+@endsection
+
+@section('jsTemplate')
 @endsection
 
 @section('body')
