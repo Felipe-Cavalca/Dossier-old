@@ -13,7 +13,7 @@ class secretarioController extends Controller  {
         //controle de qual nav será usada
         $dados['nav'] = (isset($get['nav']) ? $get['nav'] : '');
 
-        return view('secretario/arquivos', $dados);
+        return view('secretario/home', $dados);
     }
 
 } 

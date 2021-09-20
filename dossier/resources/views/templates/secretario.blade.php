@@ -9,18 +9,18 @@
 
 @section('body')
 
-@switch($nav)
-    @case('esquerda')
-        @yield('nav-esquerda')
-        @break
-    @default
-        @yield('nav-topo')
-@endswitch
+    @switch($nav)
+        @case('esquerda')
+            @yield('nav-esquerda')
+            @break
+        @default
+            @yield('nav-topo')
+    @endswitch
 
-<div class="card m-5 meio-pagina">
-    <div class="card-body">
-        @yield('pagina')
+    <div class="card m-5 meio-pagina">
+        <div class="card-body conteudo">
+            @yield('pagina')
+        </div>
     </div>
-</div>
 
 @endsection
