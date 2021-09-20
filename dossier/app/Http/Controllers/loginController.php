@@ -17,8 +17,8 @@ class loginController extends Controller  {
         $get = $request->all();
 
         $dados=[
-            'erro' => (isset($get['erro']) && $get['erro'] == 'invalido' ? 'invalido' : ''),
-            'email' => (isset($get['email']) ? $get['email'] : ''),
+            'erro' => $get['erro'] ?? '',
+            'email' => $get['email'] ?? '',
             'check' => (isset($get['check']) && $get['check'] == 1 ? 'checked' : '')
         ];
 

@@ -11,7 +11,7 @@ class secretarioController extends Controller  {
         $get = $request->all();
 
         //controle de qual nav será usada
-        $dados['nav'] = (isset($get['nav']) ? $get['nav'] : '');
+        $dados['nav'] = $get['nav'] ?? "";
 
         return view('secretario/home', $dados);
     }

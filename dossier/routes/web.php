@@ -18,7 +18,8 @@ use App\Http\Controllers\secretarioController;
 //rotas acessadas via get
 //deslogado
 Route::get('/', [loginController::class, 'login']);
-Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
 Route::post('/', [loginController::class, 'logar']);
+
+Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
 //secretario
 Route::get('/secretario//', [secretarioController::class, 'arquivos']);
