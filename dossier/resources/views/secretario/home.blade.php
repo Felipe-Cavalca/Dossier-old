@@ -8,8 +8,7 @@
 @endsection
 
 @section('pagina')
-
-<h1>Essa é a home do secretario</h1>
-
-<p>aqui ficam os dados</p>
+<a href="/arquivos" target="_blank" >full screen</a>
+<hr>
+<iframe src="/arquivos"></iframe>
 @endsection

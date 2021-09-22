@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- importação de css -->
     <link rel="stylesheet" type="text/css" href="{{asset('bootstrap/css/bootstrap.css')}}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/components.css')}}" media="screen"/>
     @yield('cssTemplate')
     @yield('css')
     <title>Dossier</title>
