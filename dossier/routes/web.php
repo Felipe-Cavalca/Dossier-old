@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\secretarioController;
+use App\Http\Controllers\alunoController;
 use App\Http\Controllers\arquivoController;
 
 /*
@@ -24,6 +25,8 @@ Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
 
 //secretario
 Route::get('/secretario//', [secretarioController::class, 'arquivos']);
+//aluno
+Route::get('/aluno//', [alunoController::class, 'arquivos']);
 
 //modules
 Route::get('/arquivos', [arquivoController::class, 'listar']);

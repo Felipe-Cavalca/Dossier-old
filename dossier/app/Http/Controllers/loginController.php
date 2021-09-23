@@ -48,8 +48,9 @@ class loginController extends Controller  {
         $check = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
 
         if($email == "secretario@sistema" && $senha == "123"){
-            //fazer redirecionamento para a pagina de logado
             return redirect('/secretario//');
+        }else if($email == "aluno@sistema" && $senha == "123"){
+            return redirect('/aluno//');
         }else{
             echo 'erro';
             return redirect("/?erro=invalido&email=".$email."&check=".$check);
