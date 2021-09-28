@@ -8,7 +8,5 @@
 @endsection
 
 @section('pagina')
-<a href="/arquivos" target="_blank" >Expandir</a>
-<hr>
-<iframe src="/arquivos"></iframe>
+pagina
 @endsection

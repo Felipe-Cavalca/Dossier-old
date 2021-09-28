@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\secretarioController;
 use App\Http\Controllers\alunoController;
 use App\Http\Controllers\arquivoController;
+use App\Http\Controllers\cadastroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
 Route::get('/secretario//', [secretarioController::class, 'arquivos']);
 //aluno
 Route::get('/aluno//', [alunoController::class, 'arquivos']);
+
+//cadastros
+Route::get('/cadastro/aluno', [cadastroController::class, 'cadastroAluno']);
 
 //modules
 Route::get('/arquivos', [arquivoController::class, 'listar']);
