@@ -15,6 +15,7 @@
 @yield('body')
 <!-- importação de js -->
 <script type="text/javascript" src="{{asset('bootstrap/js/bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('jquery/jquery-3.6.0.min.js')}}"></script>
 @yield('jsTemplate')
 @yield('js')
 </body>

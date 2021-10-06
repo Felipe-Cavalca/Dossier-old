@@ -1,16 +1,15 @@
-para criar um banco de dados em sqlite 
-criar um arquivo 
-databse.sqlite
-
-mudar nas variaveis de ambiente em
-.env
-e definir o sqlite
-
 criar uma migration
-php artisan make:migration criar_tabela_usuarios
+``` php artisan make:migration criar_tabela_usuarios ```
 
 rodar uma migration
-php artisan migrate
+``` php artisan migrate ```
 
 
-para manipular a tabela
+para reverter as Migrations
+``` php artisan migrate:Rollback ```
+
+criar uma model
+``` php artisan make:model Usuario ```
+
+banco no plural
+model no singular

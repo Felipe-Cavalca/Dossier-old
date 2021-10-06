@@ -8,8 +8,8 @@
 @endsection
 
 @section('pagina')
-<form id="login" method="post">
-    <div>@csrf</div>
+<form id="login" action="{{ route('logar') }}" method="post">
+    @csrf
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email"

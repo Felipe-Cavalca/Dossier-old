@@ -15,7 +15,8 @@
                         Cadastros
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/cadastro/aluno">Aluno</a></li>
+                        <li><a class="dropdown-item" href="{{route('cadastroAluno')}}">Aluno</a></li>
+                        <li><a class="dropdown-item" href="{{route('cadastroSecretario')}}">Secretario</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

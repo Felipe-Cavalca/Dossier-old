@@ -20,9 +20,9 @@ use App\Http\Controllers\cadastroController;
 
 //rotas acessadas via get
 //deslogado
-Route::get('/', [loginController::class, 'login']);
-Route::post('/', [loginController::class, 'logar']);
-Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha']);
+Route::get('/', [loginController::class, 'login'])->name('login');
+Route::post('/', [loginController::class, 'logar'])->name('logar');
+Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha'])->name('recuperarSenha');
 
 //secretario
 Route::get('/secretario//', [secretarioController::class, 'arquivos']);
@@ -30,7 +30,10 @@ Route::get('/secretario//', [secretarioController::class, 'arquivos']);
 Route::get('/aluno//', [alunoController::class, 'arquivos']);
 
 //cadastros
-Route::get('/cadastro/aluno', [cadastroController::class, 'cadastroAluno']);
+Route::get('/cadastro/aluno', [cadastroController::class, 'cadastroAluno'])->name('cadastroAluno');
+Route::get('/cadastro/secretario', [cadastroController::class, 'cadastroSecretario'])->name('cadastroSecretario');
+Route::post('/cadastro/secretario', [cadastroController::class, 'cadastroSecretario'])->name('cadastroSecretario');
+
 
 //modules
 Route::get('/arquivos', [arquivoController::class, 'listar']);
