@@ -20,8 +20,8 @@ use App\Http\Controllers\cadastroController;
 
 //rotas acessadas via get
 //deslogado
-Route::get('/', [loginController::class, 'login'])->name('login');
-Route::post('/', [loginController::class, 'logar'])->name('logar');
+Route::get('/', [loginController::class, 'login'])->name('login')->name('login');
+Route::post('/', [loginController::class, 'login'])->name('login')->name('login');
 Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha'])->name('recuperarSenha');
 
 //secretario

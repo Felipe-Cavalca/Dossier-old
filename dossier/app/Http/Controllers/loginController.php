@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
 class loginController extends Controller  {
 
@@ -14,14 +15,55 @@ class loginController extends Controller  {
      * @return view - a visualização do sistema
      */
     public function login(Request $request){
-        $get = $request->all();
+        //captura os dados da request e salva na variavel dados
+        $dados = $request->all();
 
-        $dados=[
-            'erro' => $get['erro'] ?? '',
-            'email' => $get['email'] ?? '',
-            'check' => (isset($get['check']) && $get['check'] == 1 ? 'checked' : '')
-        ];
+        //valida se veio via post
+        if(!empty($dados)){
+            //chama o modelo do usuario
+            $usuarioModel = new Usuario();
 
+            //verificando se o usuario existe
+            $usuario = $usuarioModel::where([
+                'email' => $dados['email'],
+                'senha' => md5($dados['senha'])
+            ])->first();
+
+            //caso sim trata os dados
+            if(isset($usuario)){
+                $_SESSION['usuario'] = $usuario;
+                $_SESSION['usuario']['logado'] = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
+                
+                //verifica o tipo de usuario
+                if($usuario->tipo == 'secretario'){
+                    return redirect('secretario');
+                }else{
+                    $dados['msg']['erro'] = 'tipo';
+                }
+                
+                //caso não haja nenhum erro define a mensagem de sucesso
+                if(!isset($dados['msg']['erro'])){
+                    $dados['msg']['erro'] = 'sucesso';
+                }
+                
+            }else{
+                //define mensagem de erro
+                $dados['msg']['erro'] = 'invalido';
+            }
+            
+            //define o check para marcado ou não
+            $dados['check'] = (isset($dados['check']) && $dados['check'] == 'on' ? 'checked' : '');
+        }else{
+            $dados['email'] = '';
+            $dados=[
+                'msg' => [
+                    'erro' => ''
+                ],
+                'check' => ''
+            ];
+            $dados['email'] = '';
+        }
+        //retorna a view
         return view('deslogado/login', $dados);
     }
 
@@ -32,29 +74,6 @@ class loginController extends Controller  {
      */
     public function recuperarSenha(){
         return view('deslogado/recuperarSenha');
-    }
-
-    /**
-     * Função para logar no sistema
-     *
-     * @param Request $request - dados recebidos via post
-     * @return void - redireciona o usuario
-     */
-    public function logar(Request $request){
-        $dados = $request->all();
-        
-        $email = $dados['email'];
-        $senha = $dados['senha'];
-        $check = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
-
-        if($email == "secretario@sistema" && $senha == "123"){
-            return redirect('/secretario//');
-        }else if($email == "aluno@sistema" && $senha == "123"){
-            return redirect('/aluno//');
-        }else{
-            echo 'erro';
-            return redirect("/?erro=invalido&email=".$email."&check=".$check);
-        }
     }
 
 } 
