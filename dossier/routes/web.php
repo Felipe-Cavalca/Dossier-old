@@ -37,3 +37,4 @@ Route::post('/cadastro/secretario', [cadastroController::class, 'cadastroSecreta
 
 //modules
 Route::get('/arquivos', [arquivoController::class, 'listar']);
+Route::post('/arquivos', [arquivoController::class, 'upload'])->name('upload');

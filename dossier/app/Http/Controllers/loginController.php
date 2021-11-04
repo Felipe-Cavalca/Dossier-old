@@ -31,8 +31,9 @@ class loginController extends Controller  {
 
             //caso sim trata os dados
             if(isset($usuario)){
-                $_SESSION['usuario'] = $usuario;
-                $_SESSION['usuario']['logado'] = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
+                //salva a sessão
+                $request->session()->put('usuario', $usuario);
+                // $_SESSION['usuario']['logado'] = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
                 
                 //verifica o tipo de usuario
                 if($usuario->tipo == 'secretario'){

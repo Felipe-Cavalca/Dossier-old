@@ -10,7 +10,7 @@
 @section('body')
 <div class="container-fluid mt-5">
     <div class="titulo">
-        <h1>Dossier</h1>
+        <h1>{{__('deslogado.nomeProjeto')}}</h1>
     </div>
 </div>
 <div class="container-fluid mt-5">

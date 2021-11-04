@@ -17,6 +17,7 @@ class CreateUsuarioTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
+            $table->timestamp('email_verificado')->nullable();
             $table->string('senha');
             $table->string('nascimento')->nullable();
             $table->string('tipo');
