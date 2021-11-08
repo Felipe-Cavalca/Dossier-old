@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Storage;
 use App\Models\Arquivo;
 use App\Models\UsuarioArquivo;
 
@@ -11,13 +12,32 @@ class arquivoController extends Controller  {
 
     public function listar(Request $request){
 
-        $retorno = [
-            'msg' => $request->session()->get('msg')
-        ];
+        //valida se o usuario está logado
+        if(Controller::logado($request)){
 
-        Controller::pr($request->session()->get('msg'));
+            //chama o modelo do usuario
+            $usuarioArquivoModel = new UsuarioArquivo();
+            $arquivoModel = new Arquivo();
 
-        return view('modules/arquivos/arquivos', $retorno);
+            $usuarioLogado = $request->session()->get('usuario');
+            $arquivos = [];
+
+            $arquivosUsuario = $usuarioArquivoModel::where('usuario_id', $usuarioLogado['id'])->get();
+            foreach ($arquivosUsuario as $key => $arquivo) {
+                $arquivos[$key] = $arquivoModel::where('id', $arquivo['arquivo_id'])->first();
+            }
+
+            $retorno = [
+                'msg' => $request->session()->get('msg'),
+                'arquivos' => $arquivos
+            ];
+    
+            Controller::pr($request->session()->get('msg'));
+    
+            return view('modules/arquivos/arquivos', $retorno);
+        }else{
+            Controller::pr("Você não está logado");    
+        }
     }
 
     /**
@@ -61,25 +81,62 @@ class arquivoController extends Controller  {
 
                 //salva os dados do arquivo
                 $arquivoModel->nome = $request->arquivo->getClientOriginalName();
-                $arquivoModel->dono = $usuarioLogado['id'];
-                $arquivoModel->caminho = $path;
+                $arquivoModel->usuario_id = $usuarioLogado['id'];
+                $arquivoModel->caminho = $path.$nameFile;
                 $arquivoModel->save();
 
                 //salva os dados do usuarioArquivo
-                $usuarioArquivoModel->usuario = $usuarioLogado['id'];
-                $usuarioArquivoModel->arquivo = $arquivoModel->id;
+                $usuarioArquivoModel->usuario_id = $usuarioLogado['id'];
+                $usuarioArquivoModel->arquivo_id = $arquivoModel->id;
                 $usuarioArquivoModel->save();
 
 
-                $request->session()->put('msg', ['sucesso' => 'upload concluido']);
+                $request->session()->flash('msg', ['sucesso' => 'upload concluido']);
             }else{
-                $request->session()->put('msg', ['erro' => 'não foi possivel fazer o upload']);
+                $request->session()->flash('msg', ['erro' => 'não foi possivel fazer o upload']);
             }
         }else{
-            $request->session()->put('msg', ['erro' => 'não foi possivel validar o login']);
+            $request->session()->flash('msg', ['erro' => 'não foi possivel validar o login']);
         }
 
         return redirect()->back();
     }
+
+    public function download(Request $request){
+        //captura os dados da request e salva na variavel dados
+        $dados = $request->all();
+        
+        // Verifica se informou o arquivo e se é válido
+        if (!empty($dados['id']) && Controller::logado($request)) {
+            //captura os dados do usuario logado
+            $usuarioLogado = $request->session()->get('usuario');
+
+            //instancia o modelo
+            $usuarioArquivoModel = new UsuarioArquivo();
+
+            //verificando se o usuario é dono do arquivo
+            $arquivo = $usuarioArquivoModel::where([
+                'usuario_id' => $usuarioLogado['id'],
+                'arquivo_id' => $dados['id']
+            ])->first();
+
+            if(!empty($arquivo)){
+                //pegando dados do arquivo
+                $arquivoModel = new Arquivo();
+                $arquivo = $arquivoModel::where([
+                    'id' => $dados['id']
+                ])->first();
+                
+                return Storage::download($arquivo['caminho'], $arquivo['nome']);
+            }else{
+                echo 'vazio';
+                return redirect()->back();
+            }
+
+        }else{
+            echo 'negado';
+            return redirect()->back();
+        }
+    } 
 
 }

@@ -16,7 +16,7 @@ class CriarTabelaArquivo extends Migration
         Schema::create('arquivo', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->bigInteger('dono');
+            $table->bigInteger('usuario_id');
             $table->string('caminho')->unique();
             $table->timestamps();
         });

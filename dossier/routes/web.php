@@ -38,3 +38,4 @@ Route::post('/cadastro/secretario', [cadastroController::class, 'cadastroSecreta
 //modules
 Route::get('/arquivos', [arquivoController::class, 'listar']);
 Route::post('/arquivos', [arquivoController::class, 'upload'])->name('upload');
+Route::get('/download', [arquivoController::class, 'download'])->name('download');

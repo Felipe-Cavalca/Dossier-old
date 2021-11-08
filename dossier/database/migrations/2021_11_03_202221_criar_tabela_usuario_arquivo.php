@@ -15,8 +15,8 @@ class CriarTabelaUsuarioArquivo extends Migration
     {
         Schema::create('usuario_arquivo', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('usuario');
-            $table->bigInteger('arquivo');
+            $table->bigInteger('usuario_id');
+            $table->bigInteger('arquivo_id');
             $table->timestamps();
         });
     }
