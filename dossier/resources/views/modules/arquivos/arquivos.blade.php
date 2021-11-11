@@ -13,6 +13,18 @@
 
   <button type="submit">Enviar Arquivo</button>
 </form>
+<form action="{{ route('criar-pasta') }}" method="post">
+  @csrf
+  <input type="text" name="nome">
+
+  <button type="submit">Criar pasta</button>
+</form>
+
+@if (isset($pastaPai))
+  <a href="arquivos?pasta={{$pastaPai}}">
+    <button>Voltar</button>
+  </a>
+@endif
 
 <table class="table">
   <thead>
@@ -26,9 +38,15 @@
       <tr>
         <th scope="row">{{$arquivo['nome']}}</th>
         <td>
-          <a href="download?id={{$arquivo['id']}}" target="_blank">
-            <button >Download</button>
-          </a>
+          @if ($arquivo['tipo'] == 'arquivo')
+            <a href="download?id={{$arquivo['id']}}" target="_blank">
+              <button >Download</button>
+            </a>
+          @elseif($arquivo['tipo'] == 'pasta')
+            <a href="arquivos?pasta={{$arquivo['id']}}">
+              <button >Entrar</button>
+            </a>
+          @endif
         </td>
       </tr>
     @endforeach

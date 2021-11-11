@@ -18,6 +18,8 @@ class CriarTabelaArquivo extends Migration
             $table->string('nome');
             $table->bigInteger('usuario_id');
             $table->string('caminho')->unique();
+            $table->integer('pai')->nullable();
+            $table->string('tipo');
             $table->timestamps();
         });
     }

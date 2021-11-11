@@ -33,6 +33,12 @@ class loginController extends Controller  {
             if(isset($usuario)){
                 //salva a sessão
                 $request->session()->put('usuario', $usuario);
+
+                $caminho = [
+                    'caminho' => '/arquivos/'.$dados['email'].'/',
+                    'pai' => 0
+                ];
+                $request->session()->put('caminho', $caminho);
                 // $_SESSION['usuario']['logado'] = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
                 
                 //verifica o tipo de usuario
