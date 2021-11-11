@@ -7,6 +7,13 @@
 @endsection
 
 @section('pagina')
+
+@if (isset($mensagem))
+  <div>
+    {{$msg['sucesso']}}
+  </div>
+@endif
+
 <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
   @csrf
   <input type="file" name="arquivo">
@@ -31,6 +38,7 @@
     <tr>
       <th scope="col">Nome</th>
       <th scope="col">download</th>
+      <th scope="col">excluir</th>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +55,11 @@
               <button >Entrar</button>
             </a>
           @endif
+        </td>
+        <td>
+          <a href="deleta?id={{$arquivo['id']}}">
+              <button>Excluir</button>
+            </a>
         </td>
       </tr>
     @endforeach

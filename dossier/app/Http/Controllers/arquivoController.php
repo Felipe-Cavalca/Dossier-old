@@ -228,4 +228,45 @@ class arquivoController extends Controller  {
         }
     }
 
+    public function deleta(Request $request){
+        //captura os dados da request e salva na variavel dados
+        $dados = $request->all();
+        
+        // Verifica se informou o arquivo e se é válido
+        if (!empty($dados['id']) && Controller::logado($request)) {
+            //captura os dados do usuario logado
+            $usuarioLogado = $request->session()->get('usuario');
+
+            //instancia o modelo
+            $arquivoModel = new Arquivo();
+
+            //verificando se o usuario é dono do arquivo
+            $arquivo = $arquivoModel::where([
+                'id' => $dados['id'],
+                'usuario_id' => $usuarioLogado['id']
+            ])->first();
+
+            //caso o arquivo exista
+            if(!empty($arquivo)){
+                //valida se é um arquivo ou uma pasta
+                
+                //apaga o arquivo
+                Storage::delete($arquivo['caminho']);
+
+                //deleta o registro do banco
+                $arquivo->delete();
+
+                $request->session()->flash('msg', ['sucesso' => 'Arquivo deletado']);
+
+                //redireciona o usuario
+                return redirect()->back();
+            }else{
+                $request->session()->flash('msg', ['sucesso' => 'arquivo não localizado']);
+                return redirect()->back();
+            }
+        }else{
+            $request->session()->flash('msg', ['sucesso' => 'Acesso negado']);
+            return redirect()->back();
+        }
+    }
 }
