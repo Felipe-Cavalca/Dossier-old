@@ -34,6 +34,7 @@ class loginController extends Controller  {
                 //salva a sessão
                 $request->session()->put('usuario', $usuario);
 
+                //cria o caminho para os arquivos
                 $caminho = [
                     'caminho' => '/arquivos/'.$dados['email'].'/',
                     'pai' => 0

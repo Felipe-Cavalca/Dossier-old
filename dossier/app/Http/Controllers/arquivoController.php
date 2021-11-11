@@ -15,7 +15,7 @@ class arquivoController extends Controller  {
      * Função para listas os arquivos do usuario
      *
      * @param Request $request
-     * @return void
+     * @return view
      */
     public function listar(Request $request){
 
@@ -47,12 +47,6 @@ class arquivoController extends Controller  {
                 $caminhoAtual['caminho'] = $pasta[0]['caminho'];
                 $caminhoAtual['pai'] = $pasta[0]['id'];
                 $request->session()->put('caminho', $caminhoAtual);
-
-                //retorna a pasta pai
-                // Controller::pr($pasta);
-
-                //apaga a pasta da posição 0 pois é dele onde estamos dentro
-                // unset($arquivos[0]);
             }else{
                 //caso seja da raiz
 
@@ -64,9 +58,9 @@ class arquivoController extends Controller  {
 
                 //lista os arquivos e pastas da raiz
                 $arquivos = $arquivoModel::where([
-                                'pai' => 0,
-                                'usuario_id' => $usuarioLogado['id']
-                            ])->get();
+                    'pai' => 0,
+                    'usuario_id' => $usuarioLogado['id']
+                ])->get();
 
             }
 
@@ -89,7 +83,7 @@ class arquivoController extends Controller  {
      * @return redirect
      */
     public function upload(Request $request){
-        // Define o valor default para a variável que contém o nome da imagem 
+        // Define o valor default para a variável que contém o nome do arquivo
         $nameFile = null;
 
         // Verifica se informou o arquivo e se é válido
@@ -116,7 +110,7 @@ class arquivoController extends Controller  {
             $upload = $request->arquivo->storeAs($path, $nameFile);
             // Se tiver funcionado o arquivo foi armazenado em storage/app/public/arquivos/nomedinamicoarquivo.extensao
             
-            // Verifica se deu certo o upload (Redireciona de volta)
+            // Verifica se deu certo o upload
             if ($upload){
                 //chama o modelo do arquivo e do usuario arquivo
                 $arquivoModel = new Arquivo();
@@ -153,7 +147,7 @@ class arquivoController extends Controller  {
      * Função para fazer o download do arquivo
      *
      * @param Request $request
-     * @return void
+     * @return download or redirect - faz o download ou redireciona
      */
     public function download(Request $request){
         //captura os dados da request e salva na variavel dados
@@ -173,6 +167,7 @@ class arquivoController extends Controller  {
                 'arquivo_id' => $dados['id']
             ])->first();
 
+            //caso o arquivo exista
             if(!empty($arquivo)){
                 //pegando dados do arquivo
                 $arquivoModel = new Arquivo();
@@ -180,6 +175,7 @@ class arquivoController extends Controller  {
                     'id' => $dados['id']
                 ])->first();
                 
+                //faz o download
                 return Storage::download($arquivo['caminho'], $arquivo['nome']);
             }else{
                 echo 'vazio';
@@ -192,11 +188,19 @@ class arquivoController extends Controller  {
         }
     } 
 
+    /**
+     * Função para criar pasta
+     *
+     * @param Request $request
+     * @return void
+     */
     public function criarPasta(Request $request){
 
+        //valida se o usuario está logado
         if (Controller::logado($request)) {
             $dados = $request->all();
             
+            //captura as variaveis da sessão
             $usuarioLogado = $request->session()->get('usuario');
             $caminhoAtual = $request->session()->get('caminho');
     
@@ -205,7 +209,8 @@ class arquivoController extends Controller  {
             $usuarioArquivoModel = new UsuarioArquivo();
             $arquivoModel->id = null;
             $usuarioArquivoModel->id = null;
-            
+
+            //salva os dados
             $arquivoModel->nome = $dados['nome'];
             $arquivoModel->usuario_id = $usuarioLogado['id'];
             $arquivoModel->caminho = $caminhoAtual['caminho'].$dados['nome'].'/';
@@ -214,7 +219,8 @@ class arquivoController extends Controller  {
 
             //salva a sessão
             $arquivoModel->save();
-            
+    
+            //redireciona o usuario
             $request->session()->flash('msg', ['sucesso' => 'upload concluido']);
             return redirect()->back();
         }else{
