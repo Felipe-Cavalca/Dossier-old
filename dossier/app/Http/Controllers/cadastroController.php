@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Models\Secretario;
+use App\Models\UsuarioTipo;
 
 class cadastroController extends Controller  {
 
@@ -29,6 +31,8 @@ class cadastroController extends Controller  {
         if($dados){
             //chama o modelo do usuario
             $usuarioModel = new Usuario();
+            $secretarioModel = new Secretario();
+            $usuarioTipoModel = new UsuarioTipo();
             
             //faz as validações de dados
 
@@ -45,13 +49,25 @@ class cadastroController extends Controller  {
 
             //caso não haja erro cadastra no banco
             if(!isset($dados['msg']['erro'])){
-                //cadastro o usuario na base de dados    
+                //cadastro o usuario na base de dados
+                //do usuario
                 $usuarioModel->nome = $dados['nome'];
                 $usuarioModel->email = $dados['email'];
                 $usuarioModel->senha = $dados['senha'];
-                $usuarioModel->tipo = 'secretario';
-
+                $usuarioModel->cpf = $dados['cpf'];
+                $usuarioModel->telefone = $dados['telefone'];
+                $usuarioModel->nascimento = $dados['nascimento'];
                 $usuarioModel->save();
+                
+                //do secretario
+                $secretarioModel->turno = $dados['turno'];
+                $secretarioModel->save();
+
+                //usuario tipo
+                $usuarioTipoModel->usuario_id = $usuarioModel->id;
+                $usuarioTipoModel->relacionamento_id = $secretarioModel->id;
+                $usuarioTipoModel->tipo = "Secretario";
+                $usuarioTipoModel->save();
  
                 //define o erro como sucesso
                 $dados['msg']['erro'] = 'sucesso';
@@ -61,9 +77,15 @@ class cadastroController extends Controller  {
         }else{
             //seta os dados para a view
             $dados['msg']['erro'] = '';
+            $dados['msg']['secretario'] = '';
+            //do usuario
             $dados['nome'] = '';
             $dados['email'] = '';
-            $dados['msg']['secretario'] = '';
+            $dados['cpf'] = '';
+            $dados['telefone'] = '';
+            $dados['nascimento'] = '';
+            //do secretario
+            $dados['turno'] = '';
         }
 
         //controle de qual nav será usada
