@@ -76,7 +76,7 @@
                 placeholder="(xx)00000-0000"
                 required
                 aria-describedby="telefoneHelp">
-            <div id="telefoneHelp" class="form-text">Telefone para contao</div>
+            <div id="telefoneHelp" class="form-text">Telefone para contato</div>
         </div>
         <div class="mb-3 col-4">
             <label for="nascimento" class="form-label">nascimento</label>
@@ -93,7 +93,7 @@
 
     <div class="mb-3 col-12">
         <label for="turno" class="form-label">turno</label>
-        <input type="turno"
+        <input type="text"
             name="turno"
             id="turno"
             class="form-control"
