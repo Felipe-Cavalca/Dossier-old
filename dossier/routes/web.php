@@ -33,6 +33,7 @@ Route::get('/aluno//', [alunoController::class, 'arquivos']);
 Route::get('/cadastro/aluno', [cadastroController::class, 'cadastroAluno'])->name('cadastroAluno');
 Route::get('/cadastro/secretario', [cadastroController::class, 'cadastroSecretario'])->name('cadastroSecretario');
 Route::post('/cadastro/secretario', [cadastroController::class, 'cadastroSecretario'])->name('cadastroSecretario');
+Route::post('/cadastro/aluno', [cadastroController::class, 'cadastroAluno'])->name('cadastroAluno');
 
 
 //modules
