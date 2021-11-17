@@ -17,6 +17,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{route('cadastroAluno')}}">Aluno</a></li>
                         <li><a class="dropdown-item" href="{{route('cadastroSecretario')}}">Secretario</a></li>
+                        <li><a class="dropdown-item" href="{{route('cadastroProfessor')}}">Professor</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
