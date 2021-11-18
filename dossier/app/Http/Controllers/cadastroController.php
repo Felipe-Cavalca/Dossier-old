@@ -52,6 +52,7 @@ class cadastroController extends Controller  {
                 $usuarioModel->cpf = $dados['cpf'];
                 $usuarioModel->telefone = $dados['telefone'];
                 $usuarioModel->nascimento = $dados['nascimento'];
+                $usuarioModel->ativo = true;
                 $usuarioModel->save();
                 
                 //do aluno
@@ -62,6 +63,7 @@ class cadastroController extends Controller  {
                 $usuarioTipoModel->usuario_id = $usuarioModel->id;
                 $usuarioTipoModel->relacionamento_id = $alunoModel->id;
                 $usuarioTipoModel->tipo = "Aluno";
+                $usuarioTipoModel->ativo = true;
                 $usuarioTipoModel->save();
  
                 //define o erro como sucesso
@@ -130,6 +132,7 @@ class cadastroController extends Controller  {
                 $usuarioModel->cpf = $dados['cpf'];
                 $usuarioModel->telefone = $dados['telefone'];
                 $usuarioModel->nascimento = $dados['nascimento'];
+                $usuarioModel->ativo = true;
                 $usuarioModel->save();
                 
                 //do secretario
@@ -140,6 +143,7 @@ class cadastroController extends Controller  {
                 $usuarioTipoModel->usuario_id = $usuarioModel->id;
                 $usuarioTipoModel->relacionamento_id = $secretarioModel->id;
                 $usuarioTipoModel->tipo = "Secretario";
+                $usuarioTipoModel->ativo = true;
                 $usuarioTipoModel->save();
  
                 //define o erro como sucesso
@@ -208,6 +212,7 @@ class cadastroController extends Controller  {
                 $usuarioModel->cpf = $dados['cpf'];
                 $usuarioModel->telefone = $dados['telefone'];
                 $usuarioModel->nascimento = $dados['nascimento'];
+                $usuarioModel->ativo = true;
                 $usuarioModel->save();
                 
                 //do professor
@@ -218,6 +223,7 @@ class cadastroController extends Controller  {
                 $usuarioTipoModel->usuario_id = $usuarioModel->id;
                 $usuarioTipoModel->relacionamento_id = $professorModel->id;
                 $usuarioTipoModel->tipo = "Professor";
+                $usuarioTipoModel->ativo = true;
                 $usuarioTipoModel->save();
  
                 //define o erro como sucesso

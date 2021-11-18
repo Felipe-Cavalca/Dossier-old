@@ -18,6 +18,7 @@ class CriarTabelaUsuarioTipo extends Migration
             $table->bigInteger('usuario_id');
             $table->bigInteger('relacionamento_id');
             $table->string('tipo');
+            $table->boolean('ativo');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CriarTabelaUsuarioTipo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario_arquivo');
+        Schema::dropIfExists('usuario_tipo');
     }
 }
