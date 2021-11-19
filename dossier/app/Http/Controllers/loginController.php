@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Models\UsuarioTipo;
 
 class loginController extends Controller  {
 
@@ -26,7 +27,8 @@ class loginController extends Controller  {
             //verificando se o usuario existe
             $usuario = $usuarioModel::where([
                 'email' => $dados['email'],
-                'senha' => md5($dados['senha'])
+                'senha' => md5($dados['senha']),
+                'ativo' => true
             ])->first();
 
             //caso sim trata os dados
@@ -43,7 +45,15 @@ class loginController extends Controller  {
                 // $_SESSION['usuario']['logado'] = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
                 
                 //verifica o tipo de usuario
-                if($usuario->tipo == 'secretario'){
+                //atualmente só funciona 1 - necessario modificar
+                $usuarioTipoModel = new UsuarioTipo();
+
+                $tipo = $usuarioTipoModel::where([
+                    'usuario_id' => $usuario['id'],
+                    'ativo' => true
+                ])->get();
+
+                if($tipo[0]['tipo'] == 'Secretario'){
                     return redirect('secretario');
                 }else{
                     $dados['msg']['erro'] = 'tipo';
