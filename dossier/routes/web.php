@@ -26,6 +26,7 @@ Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha'])->name
 
 //secretario
 Route::get('/secretario//', [secretarioController::class, 'arquivos']);
+Route::get('/usaurio-list//', [secretarioController::class, 'usuarioList'])->name('usuarioList');
 //aluno
 Route::get('/aluno//', [alunoController::class, 'arquivos']);
 
@@ -36,7 +37,6 @@ Route::get('/cadastro/aluno', [cadastroController::class, 'cadastroAluno'])->nam
 Route::post('/cadastro/aluno', [cadastroController::class, 'cadastroAluno'])->name('cadastroAluno');
 Route::get('/cadastro/professor', [cadastroController::class, 'cadastroProfessor'])->name('cadastroProfessor');
 Route::post('/cadastro/professor', [cadastroController::class, 'cadastroProfessor'])->name('cadastroProfessor');
-
 
 //modules
 Route::get('/arquivos', [arquivoController::class, 'listar']);
