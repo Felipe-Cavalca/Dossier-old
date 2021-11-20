@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 class alunoController extends Controller  {
 
     public function arquivos(Request $request){
-        //controle de qual nav será usada
-        $dados['nav'] = Controller::nav();
 
-        return view('aluno/home', $dados);
+        //valida o login do usuario
+        if(Controller::logado($request)){
+            //controle de qual nav será usada
+            $dados['nav'] = Controller::nav();
+
+            return view('aluno/home', $dados);
+        }else{
+            return redirect()->back();
+        }
     }
 
 } 
