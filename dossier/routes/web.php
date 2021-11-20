@@ -26,7 +26,9 @@ Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha'])->name
 
 //secretario
 Route::get('/secretario//', [secretarioController::class, 'arquivos']);
-Route::get('/usaurio-list//', [secretarioController::class, 'usuarioList'])->name('usuarioList');
+Route::get('/usuario-list//', [secretarioController::class, 'usuarioList'])->name('usuarioList');
+Route::get('/usuario-dell', [secretarioController::class, 'usuarioDell'])->name('usuarioDell');
+
 //aluno
 Route::get('/aluno//', [alunoController::class, 'arquivos']);
 

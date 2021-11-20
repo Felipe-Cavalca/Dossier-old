@@ -48,4 +48,25 @@ class secretarioController extends Controller  {
         }
     }
 
+    public function usuarioDell(Request $request){
+        //valida se o usuario está logado
+        if(Controller::logado($request)){
+            
+            //captura os dados da request e salva na variavel dados
+            $dados = $request->all();
+
+            $usuarioModel = new Usuario();
+
+            //validando se o usuario existe
+            $usuario = $usuarioModel::where([
+                'id' => $dados['id'],
+            ])->first();
+
+            Controller::pr($usuario);
+
+            $usuario->delete();
+        }
+        return redirect()->back();
+    }
+
 }

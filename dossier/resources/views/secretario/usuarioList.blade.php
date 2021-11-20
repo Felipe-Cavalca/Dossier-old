@@ -40,8 +40,8 @@
             <td>{{$usuario['telefone']}}</td>
             <td>{{$usuario['nascimento']}}</td>
             <td>{{$usuario['ativo']}}</td>
-            <td style="color: red">X</td>
             <td style="color: green">V</td>
+            <td><a style="text-decoration: none; color: red" href="usuario-dell?id={{$usuario['id']}}">X</a></td>
         </tr>
         @endforeach
     </tbody>
