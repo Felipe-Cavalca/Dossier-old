@@ -48,6 +48,12 @@ class secretarioController extends Controller  {
         }
     }
 
+    /**
+     * Função para excluir um usuario
+     *
+     * @param Request $request
+     * @return void
+     */
     public function usuarioDell(Request $request){
         //valida se o usuario está logado
         if(Controller::logado($request)){
