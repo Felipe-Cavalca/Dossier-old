@@ -42,8 +42,8 @@
             <td>{{$usuario['nascimento']}}</td>
             <td>{{$usuario['tipo']}}</td>
             <td>{{($usuario['ativo']) ? 'Sim' : "Não"}}</td>
-            <td style="color: green">V</td>
-            <td><a style="text-decoration: none; color: red" href="usuario-dell?id={{$usuario['id']}}">X</a></td>
+            <td><a style="text-decoration: none; color: green" href="usuario-edit?id={{$usuario['id']}}">V</a></td>
+            <td><a style="text-decoration: none; color: red"   href="usuario-dell?id={{$usuario['id']}}">X</a></td>
         </tr>
         @endforeach
     </tbody>

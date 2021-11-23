@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
-
+use App\Models\Aluno;
+use App\Models\Professor;
+use App\Models\Secretario;
+use App\Models\usuarioTipo;
 class secretarioController extends Controller  {
 
     /**
@@ -73,6 +76,61 @@ class secretarioController extends Controller  {
             $usuario->delete();
         }
         return redirect()->back();
+    }
+
+    /**
+     * Função da view de editar um usuario
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function usuarioEdit(Request $request){
+        //valida se o usuario está logado
+        if(Controller::logado($request)){
+            //dados do get
+            $dados = $request->all();
+    
+            //lista o usuario
+            $usuarioModel = new Usuario();
+            $retorno['usuario'] = $usuarioModel->where([
+                'usuario.id' => $dados['id']
+            ])->first();
+
+            //valida o tipo
+            $usuarioTipoModel = new UsuarioTipo();
+            $retorno['usuario']['tipo'] = $usuarioTipoModel->where([
+                'usuario_id' => $retorno['usuario']['id']
+            ])->get();
+
+            foreach ($retorno['usuario']['tipo'] as $tipo){
+                if($tipo['tipo'] == "Aluno"){
+                    $alunoModel = new Aluno();
+                    $retorno['usuario']['aluno'] = $alunoModel::where([
+                        'id' =>  $tipo['relacionamento_id']
+                    ])->first();
+                }else if($tipo['tipo'] == "Professor"){
+                    $professorModel = new Professor();
+                    $retorno['usuario']['professor'] = $professorModel::where([
+                        'id' =>  $tipo['relacionamento_id']
+                    ])->first();
+                }else if($tipo['tipo'] == "Secretario"){
+                    $secretarioModel = new Secretario();
+                    $retorno['usuario']['secretario'] = $secretarioModel::where([
+                        'id' =>  $tipo['relacionamento_id']
+                    ])->first();
+                }
+            }
+            
+            //controle de qual nav será usada
+            $retorno['nav'] = Controller::nav();
+            //zera a msg
+            $retorno['msg']['erro'] = '';
+            $retorno['msg']['aluno'] = '';
+            // Controller::pr($retorno);
+            return view('cadastro/usuarioEdit', $retorno);
+        }else{
+            return redirect()->back();
+        }
     }
 
 }
