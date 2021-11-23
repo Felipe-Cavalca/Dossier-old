@@ -40,7 +40,7 @@ class secretarioController extends Controller  {
             
             $usuarioModel = new Usuario();
             
-            $dados['usuarios'] = $usuarioModel->all();
+            $dados['usuarios'] = $usuarioModel->join('usuario_tipo', 'usuario_tipo.id', '=', 'usuario.id')->get();
             
             return view('secretario/usuarioList', $dados);
         }else{
