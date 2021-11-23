@@ -26,6 +26,7 @@
             <th scope="col">cpf</th>
             <th scope="col">Telefone</th>
             <th scope="col">Nascimento</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Ativo</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -39,7 +40,8 @@
             <td>{{$usuario['cpf']}}</td>
             <td>{{$usuario['telefone']}}</td>
             <td>{{$usuario['nascimento']}}</td>
-            <td>{{$usuario['ativo']}}</td>
+            <td>{{$usuario['tipo']}}</td>
+            <td>{{($usuario['ativo']) ? 'Sim' : "Não"}}</td>
             <td style="color: green">V</td>
             <td><a style="text-decoration: none; color: red" href="usuario-dell?id={{$usuario['id']}}">X</a></td>
         </tr>
