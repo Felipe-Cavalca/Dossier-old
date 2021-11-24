@@ -1,6 +1,11 @@
 @extends ('templates/deslogado')
 
 @section('css')
+<style>
+    .invalido {
+        border: 4px solid red;
+    }
+</style>
 @endsection
 
 @section('js')
@@ -22,7 +27,7 @@
 
                         <button type="submit" class="btn btn-primary mt-3">{{__('botoes.enviar')}}</button>
                         <a href="{{route('recuperarSenha')}}">
-                            <button href="{{route('recuperarSenha')}}" type="button" class="btn btn-danger mt-3">{{__('botoes.esqueci_senha')}}</button>
+                            <button type="button" class="btn btn-danger mt-3">{{__('botoes.esqueci_senha')}}</button>
                         </a>
                     </div>
                 </form>

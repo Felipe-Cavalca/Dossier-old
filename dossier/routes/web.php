@@ -32,7 +32,10 @@ Route::get('/usuario-edit', [secretarioController::class, 'usuarioEdit'])->name(
 Route::post('/usuario-edit', [secretarioController::class, 'editarUsuario'])->name('usuarioEdit');
 
 //aluno
-Route::get('/aluno//', [alunoController::class, 'arquivos']);
+Route::get('/aluno//', [alunoController::class, 'home'])->name('alunoHome');
+Route::get('/aluno/armazenamento/', [alunoController::class, 'armazenamento'])->name('alunoArmazenamento');
+Route::get('/aluno/arquivos/', [alunoController::class, 'arquivos'])->name('alunoArquivos');
+Route::get('/aluno/grupos/', [alunoController::class, 'grupos'])->name('alunoGrupos');
 
 //cadastros
 Route::get('/cadastro/secretario', [cadastroController::class, 'cadastroSecretario'])->name('cadastroSecretario');
