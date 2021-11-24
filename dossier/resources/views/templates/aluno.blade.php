@@ -62,7 +62,7 @@
             <a class="nav-link navite" href="{{route('alunoGrupos')}}"> <i class="fas fa-users"></i> Grupos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link navite" href="#"> <i class="fas fa-sign-out-alt"></i> Sair</a>
+            <a class="nav-link navite" href="{{route('deslogar')}}"> <i class="fas fa-sign-out-alt"></i> Sair</a>
         </li>
     </ul>
 </section>
