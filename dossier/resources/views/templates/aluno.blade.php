@@ -12,7 +12,7 @@
 <section class="layout cima">
     <div class="row">
         <div class="col-4">
-            <h3><i class="fas fa-user-circle"></i> Bem-vindo Fulano!</h3>
+            <h3><i class="fas fa-user-circle"></i> Bem-vindo {{$nomeUsuario}}!</h3>
         </div>
 
         <div class="folha1 col-4 ">

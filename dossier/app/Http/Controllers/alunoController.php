@@ -14,7 +14,11 @@ class alunoController extends Controller
         //valida o login do usuario
         if (Controller::logado($request)) {
 
-            return view('aluno/home');
+            //pega o nome do usuario
+            $usuarioLogado = $request->session()->get('usuario');
+            $retorno['nomeUsuario'] = $usuarioLogado['nome'];
+            
+            return view('aluno/home', $retorno);
         } else {
             return redirect()->back();
         }
@@ -30,9 +34,12 @@ class alunoController extends Controller
     {
         //valida o login do usuario
         if (Controller::logado($request)) {
-
             //inicializa as variaveis
             $retorno = [];
+
+            //pega o nome do usuario
+            $usuarioLogado = $request->session()->get('usuario');
+            $retorno['nomeUsuario'] = $usuarioLogado['nome'];
 
             $retorno = array_merge($this->getArquivos($request), $retorno);
 
@@ -50,7 +57,11 @@ class alunoController extends Controller
         //valida o login do usuario
         if (Controller::logado($request)) {
 
-            return view('aluno/armazenamento');
+            //pega o nome do usuario
+            $usuarioLogado = $request->session()->get('usuario');
+            $retorno['nomeUsuario'] = $usuarioLogado['nome'];
+
+            return view('aluno/armazenamento', $retorno);
         } else {
             return redirect()->back();
         }
@@ -61,7 +72,11 @@ class alunoController extends Controller
         //valida o login do usuario
         if (Controller::logado($request)) {
 
-            return view('aluno/grupos');
+            //pega o nome do usuario
+            $usuarioLogado = $request->session()->get('usuario');
+            $retorno['nomeUsuario'] = $usuarioLogado['nome'];
+
+            return view('aluno/grupos', $retorno);
         } else {
             return redirect()->back();
         }
