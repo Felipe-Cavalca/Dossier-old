@@ -18,6 +18,8 @@
 <script type="text/javascript" src="{{asset('bootstrap/js/bootstrap.js')}}"></script>
 <script type="text/javascript" src="{{asset('jquery/jquery-3.6.0.min.js')}}"></script>
 <script type="text/javascript" src="http://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{asset('jQuery-Mask-Plugin-master/src/jquery.mask.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/mascaras.js')}}"></script>
 @yield('jsTemplate')
 @yield('js')
 </body>

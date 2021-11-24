@@ -29,7 +29,7 @@ Route::get('/secretario//', [secretarioController::class, 'arquivos']);
 Route::get('/usuario-list//', [secretarioController::class, 'usuarioList'])->name('usuarioList');
 Route::get('/usuario-dell', [secretarioController::class, 'usuarioDell'])->name('usuarioDell');
 Route::get('/usuario-edit', [secretarioController::class, 'usuarioEdit'])->name('usuarioEdit');
-Route::post('/usuario-edit', [secretarioController::class, 'usuarioEdit'])->name('usuarioEdit');
+Route::post('/usuario-edit', [secretarioController::class, 'editarUsuario'])->name('usuarioEdit');
 
 //aluno
 Route::get('/aluno//', [alunoController::class, 'arquivos']);

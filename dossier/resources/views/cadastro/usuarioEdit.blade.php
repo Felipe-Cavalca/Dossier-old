@@ -12,81 +12,63 @@
     @csrf
     <div class="sessaoEditarUsuario row">
         <div class="mb-3 col-6">
-            <label for="nome" class="form-label">Nome</label>
+            <label for="nome" class="form-label">{{__('campos.nome')}}</label>
             <input type="text"
                 name="nome"
                 id="nome"
-                class="form-control"
+                class="form-control nome"
                 value="{{$usuario['nome']}}"
-                required
-                aria-describedby="nomeHelp">
-            <div id="nomeHelp" class="form-text">Cadastre o nome do aluno</div>
+                required>
         </div>
         <div class="mb-3 col-6">
-            <label for="email" class="form-label">Email</label>
+            <label for="email" class="form-label">{{__('campos.email')}}</label>
             <input type="email"
                 name="email"
                 id="email"
-                class="form-control"
+                class="form-control email"
                 value="{{$usuario['email']}}"
-                required
-                aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Cadastre o email do aluno</div>
+                required>
         </div>
         <div class="mb-3 col-6">
-            <label for="senha" class="form-label">Senha</label>
+            <label for="senha" class="form-label">{{__('campos.senha')}}</label>
             <input type="password" 
                 name="senha"
                 id="senha"
-                class="form-control"
-                required
-                aria-describedby="senhaHelp">
-            <div id="senhaHelp" class="form-text">Cadastre a senha que o aluno usará para entrar no sistema</div>
+                class="form-control senha">
         </div>
         <div class="mb-3 col-6">
-            <label for="confirmaSenha" class="form-label">confirma Senha</label>
+            <label for="confirmaSenha" class="form-label">{{__('campos.confirmaSenha')}}</label>
             <input type="password" 
                 name="confirmaSenha"
                 id="confirmaSenha"
-                class="form-control"
-                required
-                aria-describedby="confirmaSenhaHelp">
-            <div id="confirmaSenhaHelp" class="form-text">confirme a senha que o aluno usará para entrar no sistema</div>
+                class="form-control senha">
         </div>
         <div class="mb-3 col-4">
-            <label for="cpf" class="form-label">cpf</label>
+            <label for="cpf" class="form-label">{{__('campos.cpf')}}</label>
             <input type="text" 
                 name="cpf"
                 id="cpf"
-                class="form-control"
+                class="form-control cpf"
                 value="{{$usuario['cpf']}}"
-                placeholder="(xx)00000-0000"
-                required
-                aria-describedby="telefoneHelp">
-            <div id="telefoneHelp" class="form-text">cpf do aluno</div>
+                required>
         </div>
         <div class="mb-3 col-4">
-            <label for="telefone" class="form-label">telefone</label>
+            <label for="telefone" class="form-label">{{__('campos.telefone')}}</label>
             <input type="text" 
                 name="telefone"
                 id="telefone"
-                class="form-control"
+                class="form-control telefone"
                 value="{{$usuario['telefone']}}"
-                placeholder="(xx)00000-0000"
-                required
-                aria-describedby="telefoneHelp">
-            <div id="telefoneHelp" class="form-text">Telefone para contao</div>
+                required>
         </div>
         <div class="mb-3 col-4">
-            <label for="nascimento" class="form-label">nascimento</label>
+            <label for="nascimento" class="form-label">{{__('campos.nascimento')}}</label>
             <input type="date" 
                 name="nascimento"
                 id="nascimento"
-                class="form-control"
+                class="form-control data"
                 value="{{$usuario['nascimento']}}"
-                required
-                aria-describedby="nascimentoHelp">
-            <div id="confirmaSenhaHelp" class="form-text">data de nascimento</div>
+                required>
         </div>
     </div>
 
@@ -94,63 +76,57 @@
 
     @if($tipo['tipo'] == 'Aluno')
         <div class="mb-3 col-12">
-            <label for="ra" class="form-label">ra</label>
+            <label for="ra" class="form-label">{{__('campos.ra')}}</label>
             <input type="text"
                 name="ra"
                 id="ra"
-                class="form-control"
+                class="form-control ra"
                 value="{{$usuario['aluno']['ra']}}"
-                required
-                aria-describedby="raHelp">
-            <div id="raHelp" class="form-text">Insira o Ra</div>
+                required>
         </div>
     @elseif ($tipo['tipo'] == 'Professor')
         <div class="mb-3 col-12">
-            <label for="rg" class="form-label">rg</label>
+            <label for="rg" class="form-label">{{__('campos.rg')}}</label>
             <input type="text"
                 name="rg"
                 id="rg"
-                class="form-control"
+                class="form-control rg"
                 value="{{$usuario['professor']['rg']}}"
-                required
-                aria-describedby="raHelp">
-            <div id="raHelp" class="form-text">Insira o rg</div>
+                required>
         </div>
     @elseif ($tipo['tipo'] == 'Secretario')
         <div class="mb-3 col-12">
-            <label for="turno" class="form-label">turno</label>
+            <label for="turno" class="form-label">{{__('campos.turno')}}</label>
             <input type="text"
                 name="turno"
                 id="turno"
-                class="form-control"
+                class="form-control turno"
                 value="{{$usuario['secretario']['turno']}}"
-                required
-                aria-describedby="turnoHelp">
-            <div id="turnoHelp" class="form-text">Insira os horarios de trabalho</div>
+                required>
         </div>
     @endif
 @endforeach
 
-    <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+    <button type="submit" class="btn btn-primary btn-lg">{{__('botoes.cadastrar')}}</button>
 </form>
 
 
 <!--msg de erro-->
 @if ($msg['erro'] == 'sucesso')
     <div class="alert alert-success mt-5" role="alert">
-    aluno {{$msg['nome']}} cadastrado com sucesso
+    {{__(alert.cadastroSucesso)}}
     </div>
 @elseif ($msg['erro'] == 'senha')
     <div class="alert alert-secondary mt-5" role="alert">
-    As senhas não batem
+    {{__(alert.senhaNBate)}}
     </div>
 @elseif ($msg['erro'] == 'email')
     <div class="alert alert-secondary mt-5" role="alert">
-    Email já cadastrado no sistema
+    {{__(alert.emailRepetido)}}
     </div>
 @elseif ($msg['erro'] != '')
     <div class="alert alert-secondary mt-5" role="alert">
-    Erro desconhecido
+    {{__(alert.erroDesconhecido)}}
     </div>
 @endif
 

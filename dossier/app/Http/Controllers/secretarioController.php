@@ -133,4 +133,14 @@ class secretarioController extends Controller  {
         }
     }
 
+    /**
+     * Função para editar um usuario
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function editarUsuario(Request $request){
+
+    }
+
 }
