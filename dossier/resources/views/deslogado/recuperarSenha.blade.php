@@ -6,14 +6,24 @@
 @section('js')
 @endsection
 
-@section('pagina')
-<form id="recupera-senha">
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">Use o email fornecido pela instituição</div>
-    </div>
-    <button type="submit" class="btn btn-warning btn-lg">Recuperar</button>
-    <a href="/" class="btn btn-primary btn-lg">Voltar</a>
-</form>
+@section('pagina')<center>
+    <section class="formulario centro">
+        <div class="card text-left" style="width: 28rem;">
+            <div class="card-body">
+                <!-- <form id="recuperar-senha" method="post"> -->
+                    @csrf
+                    <div class="">
+                        <label for="email" class="form-label">{{__('campos.email')}}</label>
+                        <input type="email" name="email" class="form-control align-center email" id="email" required>
+
+                        <button type="submit" class="btn btn-primary mt-3">{{__('botoes.enviar')}}</button>
+                        <a href="/">
+                            <button type="button" class="btn btn-danger mt-3">{{__('botoes.voltar')}}</button>
+                        </a>
+                    </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </section>
+</center>
 @endsection

@@ -1,0 +1,30 @@
+h1{
+    text-align: center;
+    margin-top: 20%;
+}
+body{
+   background-color: #F7D779 ;
+}
+.folha1{
+    background-color: #e7e4e4;
+    color: transparent;
+}
+.folha2{
+    background-color: #eeeeee ;
+    color: transparent;
+    margin: 0%;
+}
+
+.centro{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.centrotexto{
+    margin: auto;
+    width: 50%;
+    background-image: linear-gradient(#ffffffff, #ffffffda);
+    border: 1px solid rgb(211, 211, 211);
+    padding: 10px;
+}
