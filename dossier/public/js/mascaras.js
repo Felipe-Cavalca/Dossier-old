@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function(){;
+    $('.email').attr("placeholder", "email@etec");
     $('.cpf').mask('000.000.000.00');
     $('.cpf').attr("placeholder", "000.000.000.00");
     $('.telefone').mask('(00) 00000-0000');

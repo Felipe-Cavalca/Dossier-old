@@ -16,11 +16,11 @@
     <section class="formulario centro">
         <div class="card text-left" style="width: 28rem;">
             <div class="card-body">
-                <form id="login" method="post">
+                <form id="login" action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="">
                         <label for="email" class="form-label">{{__('campos.email')}}</label>
-                        <input type="email" name="email" class="form-control align-center email" id="email" required>
+                        <input type="email" name="email" value="{{$email}}" class="form-control align-center email" id="email" required>
 
                         <label for="senha" class="form-label mt-2">{{__('campos.senha')}}</label>
                         <input type="password" name="senha" class="form-control align-center senha" id="senha" required>
