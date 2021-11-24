@@ -24,7 +24,7 @@
                     <a class="nav-link" href="{{route('usuarioList')}}">Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="localhost:8000">Sair</a>
+                    <a class="nav-link" href="{{route('deslogar')}}">Sair</a>
                 </li>
             </ul>
         </div>
