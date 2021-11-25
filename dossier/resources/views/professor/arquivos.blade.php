@@ -1,12 +1,6 @@
 @extends('templates/professor')
 
 @section('css')
-<style>
-    iframe {
-        width: 100%;
-        height: 500px;
-    }
-</style>
 @endsection
 
 @section('js')
