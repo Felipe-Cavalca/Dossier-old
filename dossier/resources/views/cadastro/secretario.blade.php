@@ -107,19 +107,19 @@
 <!--msg de erro-->
 @if ($msg['erro'] == 'sucesso')
     <div class="alert alert-success mt-5" role="alert">
-    {{__(alert.cadastroSucesso)}}
+    {{__('alert.cadastro_sucesso')}}
     </div>
 @elseif ($msg['erro'] == 'senha')
     <div class="alert alert-secondary mt-5" role="alert">
-    {{__(alert.senhaNBate)}}
+    {{__('alert.senha_n_bate')}}
     </div>
 @elseif ($msg['erro'] == 'email')
     <div class="alert alert-secondary mt-5" role="alert">
-    {{__(alert.emailRepetido)}}
+    {{__('alert.email_repetido')}}
     </div>
 @elseif ($msg['erro'] != '')
     <div class="alert alert-secondary mt-5" role="alert">
-    {{__(alert.erroDesconhecido)}}
+    {{__('alert.erro_desconhecido')}}
     </div>
 @endif
 

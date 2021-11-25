@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'cadastroSucesso' => 'Cadastro concluido com sucesso',
-    'senhaNBate' => 'As senhas não batem',
-    'emailRepetido' => 'Esse email já está cadastrado',
-    'erroDesconhecido' => 'Houve um erro desconhecido',
+    'cadastro_sucesso' => 'Cadastro concluido com sucesso',
+    'senha_n_bate' => 'As senhas não batem',
+    'email_repetido' => 'Esse email já está cadastrado',
+    'erro_desconhecido' => 'Houve um erro desconhecido',
     'email_senha_invalido' => 'Email ou senha invalidos'
 ];
