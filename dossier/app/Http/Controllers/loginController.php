@@ -57,7 +57,9 @@ class loginController extends Controller  {
                     return redirect('secretario');
                 } else if ($tipo[0]['tipo'] == "Aluno"){
                     return redirect('aluno');
-                }else{
+                } else if ($tipo[0]['tipo'] == "Professor"){
+                    return redirect('professor');
+                } else{
                     $dados['msg']['erro'] = 'tipo';
                 }
                 
