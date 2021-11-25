@@ -5,5 +5,6 @@ return [
     'senha_n_bate' => 'As senhas não batem',
     'email_repetido' => 'Esse email já está cadastrado',
     'erro_desconhecido' => 'Houve um erro desconhecido',
-    'email_senha_invalido' => 'Email ou senha invalidos'
+    'email_senha_invalido' => 'Email ou senha invalidos',
+    'tipo_usuario_n_localizado' => 'Tipo de usuario não localizado'
 ];
