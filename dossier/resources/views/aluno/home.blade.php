@@ -7,5 +7,4 @@
 @endsection
 
 @section('pagina')
-</section>
 @endsection
