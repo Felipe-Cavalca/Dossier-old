@@ -6,6 +6,7 @@ use App\Http\Controllers\secretarioController;
 use App\Http\Controllers\alunoController;
 use App\Http\Controllers\arquivoController;
 use App\Http\Controllers\cadastroController;
+use App\Http\Controllers\professorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,12 @@ Route::get('/aluno//', [alunoController::class, 'home'])->name('alunoHome');
 Route::get('/aluno/armazenamento/', [alunoController::class, 'armazenamento'])->name('alunoArmazenamento');
 Route::get('/aluno/arquivos/', [alunoController::class, 'arquivos'])->name('alunoArquivos');
 Route::get('/aluno/grupos/', [alunoController::class, 'grupos'])->name('alunoGrupos');
+
+//professor
+Route::get('/professor//', [professorController::class, 'home'])->name('professorHome');
+Route::get('/professor/armazenamento/', [professorController::class, 'armazenamento'])->name('professorArmazenamento');
+Route::get('/professor/arquivos/', [professorController::class, 'arquivos'])->name('professorArquivos');
+Route::get('/professor/grupos/', [professorController::class, 'grupos'])->name('professorGrupos');
 
 //cadastros
 Route::get('/cadastro/secretario', [cadastroController::class, 'cadastroSecretario'])->name('cadastroSecretario');
