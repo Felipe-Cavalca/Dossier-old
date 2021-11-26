@@ -11,10 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public static function nav(){
-        return 'topo';
-    }
-
     public static function pr($data){
         echo "<pre>" . print_r($data, true) . "</pre>";
     }

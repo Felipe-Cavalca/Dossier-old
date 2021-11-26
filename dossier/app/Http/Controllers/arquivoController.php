@@ -8,72 +8,61 @@ use Storage;
 use App\Models\Arquivo;
 use App\Models\UsuarioArquivo;
 
-class arquivoController extends Controller  {
-
+class arquivoController extends Controller
+{
 
     /**
-     * Função para listas os arquivos do usuario
+     * Função para listar arquivos
      *
      * @param Request $request
-     * @return view
+     * @return void
      */
-    public function listar(Request $request){
+    public static function listar(Request $request)
+    {
+        //carrega o modelo do arquivo
+        $arquivoModel = new Arquivo();
 
-        //valida se o usuario está logado
-        if(Controller::logado($request)){
-            //chama o modelo do usuario
-            // $usuarioArquivoModel = new UsuarioArquivo(); //usado para compartilhamento
-            $arquivoModel = new Arquivo();
-            
-            //captura dados do usuario logado e inicializa as variaveis
-            $usuarioLogado = $request->session()->get('usuario');
-            $arquivos = [];
-            $retorno = [];
+        //captura dados do usuario logado e inicializa as variaveis
+        $usuarioLogado = $request->session()->get('usuario');
+        $arquivos = [];
+        $retorno = [];
 
-            //caso esteja listando de uma pasta
-            if(isset($request['pasta']) && $request['pasta'] != 0){
-                //captura o cainho atual da sessão
-                $caminhoAtual = $request->session()->get('caminho');
+        //caso esteja listando de uma pasta
+        if (isset($request['pasta']) && $request['pasta'] != 0) {
+            //captura o cainho atual da sessão
+            $caminhoAtual = $request->session()->get('caminho');
 
-                //captura a pasta e os arquivos
-                $pasta = $arquivoModel::where('id', $request['pasta'])->get();
-                $arquivos = $arquivoModel::where([
-                    ['caminho', 'LIKE', $pasta[0]['caminho'].'%'],
-                    ['pai','=', $pasta[0]['id']]
-                ])->get();
-                $retorno['pastaPai'] = $pasta[0]['pai'];
-                    
-                //atualiza o caminho atual da sessão
-                $caminhoAtual['caminho'] = $pasta[0]['caminho'];
-                $caminhoAtual['pai'] = $pasta[0]['id'];
-                $request->session()->put('caminho', $caminhoAtual);
-            }else{
-                //caso seja da raiz
+            //captura a pasta e os arquivos
+            $pasta = $arquivoModel::where('id', $request['pasta'])->get();
+            $arquivos = $arquivoModel::where([
+                ['caminho', 'LIKE', $pasta[0]['caminho'] . '%'],
+                ['pai', '=', $pasta[0]['id']]
+            ])->get();
+            $retorno['pastaPai'] = $pasta[0]['pai'];
 
-                //define o caminho para a raiz
-                $caminho = [
-                    'caminho' => '/arquivos/'.$usuarioLogado['email'].'/'
-                ];
-                $request->session()->put('caminho', $caminho);
+            //atualiza o caminho atual da sessão
+            $caminhoAtual['caminho'] = $pasta[0]['caminho'];
+            $caminhoAtual['pai'] = $pasta[0]['id'];
+            $request->session()->put('caminho', $caminhoAtual);
+        } else {
+            //caso seja da raiz
+            $caminho = [
+                'caminho' => '/arquivos/' . $usuarioLogado['email'] . '/'
+            ];
+            $request->session()->put('caminho', $caminho);
 
-                //lista os arquivos e pastas da raiz
-                $arquivos = $arquivoModel::where([
-                    'pai' => 0,
-                    'usuario_id' => $usuarioLogado['id']
-                ])->get();
-
-            }
-
-            //monta o que será retornado
-            $retorno['msg'] = $request->session()->get('msg');
-            $retorno['arquivos'] = $arquivos;
-            
-            //retorna a view
-            return view('modules/arquivos/arquivos', $retorno);
-        }else{
-            //caso o usuario não esteja logado
-            Controller::pr("Você não está logado");    
+            //lista os arquivos e pastas da raiz
+            $arquivos = $arquivoModel::where([
+                'pai' => 0,
+                'usuario_id' => $usuarioLogado['id']
+            ])->get();
         }
+
+        //monta o que será retornado
+        $retorno['arquivos'] = $arquivos;
+
+        //retorna a view
+        return $retorno;
     }
 
     /**
@@ -82,7 +71,8 @@ class arquivoController extends Controller  {
      * @param Request $request
      * @return redirect
      */
-    public function upload(Request $request){
+    public function upload(Request $request)
+    {
         // Define o valor default para a variável que contém o nome do arquivo
         $nameFile = null;
 
@@ -90,13 +80,13 @@ class arquivoController extends Controller  {
         if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid() && Controller::logado($request)) {
             //captura os dados do usuario logado
             $usuarioLogado = $request->session()->get('usuario');
-            
+
             // Define um nome aleatório para o arquivo baseado no timestamps atual
             $name = uniqid(date('HisYmd'));
-    
+
             // Recupera a extensão do arquivo
             $extension = $request->arquivo->extension();
-    
+
             // Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
 
@@ -105,13 +95,13 @@ class arquivoController extends Controller  {
 
             //define o caminho
             $path = $caminhoAtual['caminho'];
-    
+
             // Faz o upload:
             $upload = $request->arquivo->storeAs($path, $nameFile);
             // Se tiver funcionado o arquivo foi armazenado em storage/app/public/arquivos/nomedinamicoarquivo.extensao
-            
+
             // Verifica se deu certo o upload
-            if ($upload){
+            if ($upload) {
                 //chama o modelo do arquivo e do usuario arquivo
                 $arquivoModel = new Arquivo();
                 $usuarioArquivoModel = new UsuarioArquivo();
@@ -122,7 +112,7 @@ class arquivoController extends Controller  {
                 $arquivoModel->nome = $request->arquivo->getClientOriginalName();
                 $arquivoModel->usuario_id = $usuarioLogado['id'];
                 $arquivoModel->tipo = "arquivo";
-                $arquivoModel->caminho = $path.$nameFile;
+                $arquivoModel->caminho = $path . $nameFile;
                 $arquivoModel->pai = isset($caminhoAtual['pai']) ? $caminhoAtual['pai'] : 0;
                 $arquivoModel->save();
 
@@ -133,10 +123,10 @@ class arquivoController extends Controller  {
 
 
                 $request->session()->flash('msg', ['sucesso' => 'upload concluido']);
-            }else{
+            } else {
                 $request->session()->flash('msg', ['erro' => 'não foi possivel fazer o upload']);
             }
-        }else{
+        } else {
             $request->session()->flash('msg', ['erro' => 'não foi possivel validar o login']);
         }
 
@@ -149,10 +139,11 @@ class arquivoController extends Controller  {
      * @param Request $request
      * @return download or redirect - faz o download ou redireciona
      */
-    public function download(Request $request){
+    public function download(Request $request)
+    {
         //captura os dados da request e salva na variavel dados
         $dados = $request->all();
-        
+
         // Verifica se informou o arquivo e se é válido
         if (!empty($dados['id']) && Controller::logado($request)) {
             //captura os dados do usuario logado
@@ -168,25 +159,24 @@ class arquivoController extends Controller  {
             ])->first();
 
             //caso o arquivo exista
-            if(!empty($arquivo)){
+            if (!empty($arquivo)) {
                 //pegando dados do arquivo
                 $arquivoModel = new Arquivo();
                 $arquivo = $arquivoModel::where([
                     'id' => $dados['id']
                 ])->first();
-                
+
                 //faz o download
                 return Storage::download($arquivo['caminho'], $arquivo['nome']);
-            }else{
+            } else {
                 echo 'vazio';
                 return redirect()->back();
             }
-
-        }else{
+        } else {
             echo 'negado';
             return redirect()->back();
         }
-    } 
+    }
 
     /**
      * Função para criar pasta
@@ -194,16 +184,17 @@ class arquivoController extends Controller  {
      * @param Request $request
      * @return void
      */
-    public function criarPasta(Request $request){
+    public function criarPasta(Request $request)
+    {
 
         //valida se o usuario está logado
         if (Controller::logado($request)) {
             $dados = $request->all();
-            
+
             //captura as variaveis da sessão
             $usuarioLogado = $request->session()->get('usuario');
             $caminhoAtual = $request->session()->get('caminho');
-    
+
             //chama o modelo do arquivo e do usuario arquivo
             $arquivoModel = new Arquivo();
             $usuarioArquivoModel = new UsuarioArquivo();
@@ -213,25 +204,32 @@ class arquivoController extends Controller  {
             //salva os dados
             $arquivoModel->nome = $dados['nome'];
             $arquivoModel->usuario_id = $usuarioLogado['id'];
-            $arquivoModel->caminho = $caminhoAtual['caminho'].$dados['nome'].'/';
+            $arquivoModel->caminho = $caminhoAtual['caminho'] . $dados['nome'] . '/';
             $arquivoModel->pai = isset($caminhoAtual['pai']) ? $caminhoAtual['pai'] : 0;
             $arquivoModel->tipo = "pasta";
 
             //salva a sessão
             $arquivoModel->save();
-    
+
             //redireciona o usuario
             $request->session()->flash('msg', ['sucesso' => 'upload concluido']);
             return redirect()->back();
-        }else{
+        } else {
             $request->session()->flash('msg', ['erro' => 'não foi possivel validar o login']);
         }
     }
 
-    public function deleta(Request $request){
+    /**
+     * Função para deletar um arquivo/pasta
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function deleta(Request $request)
+    {
         //captura os dados da request e salva na variavel dados
         $dados = $request->all();
-        
+
         // Verifica se informou o arquivo e se é válido
         if (!empty($dados['id']) && Controller::logado($request)) {
             //captura os dados do usuario logado
@@ -247,9 +245,9 @@ class arquivoController extends Controller  {
             ])->first();
 
             //caso o arquivo exista
-            if(!empty($arquivo)){
+            if (!empty($arquivo)) {
                 //valida se é um arquivo ou uma pasta
-                
+
                 //apaga o arquivo
                 Storage::delete($arquivo['caminho']);
 
@@ -260,11 +258,11 @@ class arquivoController extends Controller  {
 
                 //redireciona o usuario
                 return redirect()->back();
-            }else{
+            } else {
                 $request->session()->flash('msg', ['sucesso' => 'arquivo não localizado']);
                 return redirect()->back();
             }
-        }else{
+        } else {
             $request->session()->flash('msg', ['sucesso' => 'Acesso negado']);
             return redirect()->back();
         }

@@ -42,10 +42,8 @@ class loginController extends Controller  {
                     'pai' => 0
                 ];
                 $request->session()->put('caminho', $caminho);
-                // $_SESSION['usuario']['logado'] = (isset($dados['check']) && $dados['check'] == 'on' ? true : false);
                 
                 //verifica o tipo de usuario
-                //atualmente só funciona 1 - necessario modificar
                 $usuarioTipoModel = new UsuarioTipo();
 
                 $tipo = $usuarioTipoModel::where([

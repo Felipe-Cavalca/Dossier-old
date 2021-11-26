@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Arquivo;
+use App\Http\Controllers\arquivoController;
 
 class alunoController extends Controller
 {
 
+    /**
+     * Função para trazer a home do aluno
+     *
+     * @param Request $request
+     * @return void
+     */
     public function home(Request $request)
     {
         //valida o login do usuario
@@ -41,7 +47,7 @@ class alunoController extends Controller
             $usuarioLogado = $request->session()->get('usuario');
             $retorno['nomeUsuario'] = $usuarioLogado['nome'];
 
-            $retorno = array_merge($this->getArquivos($request), $retorno);
+            $retorno = array_merge(arquivoController::listar($request), $retorno);
 
             //monta o que será retornado
             $retorno['msg'] = $request->session()->get('msg');
@@ -80,53 +86,5 @@ class alunoController extends Controller
         } else {
             return redirect()->back();
         }
-    }
-
-    public function getArquivos(Request $request)
-    {
-        //carrega o modelo do arquivo
-        $arquivoModel = new Arquivo();
-
-        //captura dados do usuario logado e inicializa as variaveis
-        $usuarioLogado = $request->session()->get('usuario');
-        $arquivos = [];
-        $retorno = [];
-
-        //caso esteja listando de uma pasta
-        if (isset($request['pasta']) && $request['pasta'] != 0) {
-            //captura o cainho atual da sessão
-            $caminhoAtual = $request->session()->get('caminho');
-
-            //captura a pasta e os arquivos
-            $pasta = $arquivoModel::where('id', $request['pasta'])->get();
-            $arquivos = $arquivoModel::where([
-                ['caminho', 'LIKE', $pasta[0]['caminho'] . '%'],
-                ['pai', '=', $pasta[0]['id']]
-            ])->get();
-            $retorno['pastaPai'] = $pasta[0]['pai'];
-
-            //atualiza o caminho atual da sessão
-            $caminhoAtual['caminho'] = $pasta[0]['caminho'];
-            $caminhoAtual['pai'] = $pasta[0]['id'];
-            $request->session()->put('caminho', $caminhoAtual);
-        } else {
-            //caso seja da raiz
-            $caminho = [
-                'caminho' => '/arquivos/' . $usuarioLogado['email'] . '/'
-            ];
-            $request->session()->put('caminho', $caminho);
-
-            //lista os arquivos e pastas da raiz
-            $arquivos = $arquivoModel::where([
-                'pai' => 0,
-                'usuario_id' => $usuarioLogado['id']
-            ])->get();
-        }
-
-        //monta o que será retornado
-        $retorno['arquivos'] = $arquivos;
-
-        //retorna a view
-        return $retorno;
     }
 }
