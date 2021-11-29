@@ -27,11 +27,18 @@ Route::get('/recuperar-senha', [loginController::class, 'recuperarSenha'])->name
 Route::get('/sair', [loginController::class, 'login'])->name('deslogar');
 
 //secretario
-Route::get('/secretario//', [secretarioController::class, 'arquivos']);
-Route::get('/usuario-list//', [secretarioController::class, 'usuarioList'])->name('usuarioList');
-Route::get('/usuario-dell', [secretarioController::class, 'usuarioDell'])->name('usuarioDell');
-Route::get('/usuario-edit', [secretarioController::class, 'usuarioEdit'])->name('usuarioEdit');
-Route::post('/usuario-edit', [secretarioController::class, 'editarUsuario'])->name('usuarioEdit');
+Route::get('/secretario//', [secretarioController::class, 'home'])->name('secretarioHome');
+Route::get('/secretario/armazenamento/', [secretarioController::class, 'armazenamento'])->name('secretarioArmazenamento');
+Route::get('/secretario/arquivos/', [secretarioController::class, 'arquivos'])->name('secretarioArquivos');
+Route::get('/secretario/grupos/', [secretarioController::class, 'grupos'])->name('secretarioGrupos');
+Route::get('/secretario/professores/', [secretarioController::class, 'professores'])->name('secretarioProfessores');
+Route::get('/secretario/alunos/', [secretarioController::class, 'alunos'])->name('secretarioAlunos');
+Route::get('/secretario/turmas/', [secretarioController::class, 'turmas'])->name('secretarioTurmas');
+
+// Route::get('/usuario-list//', [secretarioController::class, 'usuarioList'])->name('usuarioList');
+// Route::get('/usuario-dell', [secretarioController::class, 'usuarioDell'])->name('usuarioDell');
+// Route::get('/usuario-edit', [secretarioController::class, 'usuarioEdit'])->name('usuarioEdit');
+// Route::post('/usuario-edit', [secretarioController::class, 'editarUsuario'])->name('usuarioEdit');
 
 //aluno
 Route::get('/aluno//', [alunoController::class, 'home'])->name('alunoHome');
@@ -54,7 +61,6 @@ Route::get('/cadastro/professor', [cadastroController::class, 'cadastroProfessor
 Route::post('/cadastro/professor', [cadastroController::class, 'cadastroProfessor'])->name('cadastroProfessor');
 
 //modules
-Route::get('/arquivos', [arquivoController::class, 'listar']);
 Route::post('/arquivos', [arquivoController::class, 'upload'])->name('upload');
 Route::get('/download', [arquivoController::class, 'download'])->name('download');
 Route::post('/criarPasta', [arquivoController::class, 'criarPasta'])->name('criar-pasta');
