@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controller\arquivoController;
+use App\Http\Controllers\arquivoController;
 
 class professorController extends Controller
 {
@@ -47,7 +47,7 @@ class professorController extends Controller
             $usuarioLogado = $request->session()->get('usuario');
             $retorno['nomeUsuario'] = $usuarioLogado['nome'];
 
-            $retorno = array_merge(arquivoController::getArquivos($request), $retorno);
+            $retorno = array_merge(arquivoController::listar($request), $retorno);
 
             //monta o que será retornado
             $retorno['msg'] = $request->session()->get('msg');
