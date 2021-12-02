@@ -15,7 +15,7 @@ class CriarTabelaProfessor extends Migration
     {
         Schema::create('professor', function (Blueprint $table) {
             $table->id();
-            $table->string('rg');
+            $table->string('endereco')->nullable();
             $table->timestamps();
         });
     }

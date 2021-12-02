@@ -22,6 +22,7 @@ class CriarTabelaUsuario extends Migration
             $table->string('cpf');
             $table->string('telefone');
             $table->string('nascimento')->nullable();
+            $table->string('genero')->nullable();
             $table->boolean('ativo');
             $table->timestamps();
         });
