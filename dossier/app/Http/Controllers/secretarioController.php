@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\arquivoController;
+use App\Models\Professor;
+use App\Models\UsuarioTipo;
 
 class secretarioController extends Controller
 {
@@ -96,6 +98,15 @@ class secretarioController extends Controller
             //pega o nome do usuario
             $usuarioLogado = $request->session()->get('usuario');
             $retorno['nomeUsuario'] = $usuarioLogado['nome'];
+
+            $usuarioTipoModel = new UsuarioTipo();
+            $retorno['professores'] = $usuarioTipoModel
+                ->join('usuario', 'usuario.id', '=', 'usuario_tipo.usuario_id')
+                ->join('professor', 'professor.id', '=', 'usuario_tipo.relacionamento_id')
+                ->where([
+                    'usuario_tipo.tipo' => 'Professor'
+                ])
+                ->get();
 
             return view('secretario/professores', $retorno);
         } else {

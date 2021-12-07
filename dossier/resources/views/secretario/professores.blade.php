@@ -5,16 +5,25 @@
 
 @section('js')
 <script type="text/javascript">
-    //valida qual tab está selecionada
-    var tab = sessionStorage.getItem('tabProfessores');
-    if (tab != null) {
-        $("[data-bs-target='" + tab + "']").addClass('active');
-        $(tab).addClass('show active');
-    }
+    $(document).ready(function() {
+        //valida qual tab está selecionada
+        var tab = sessionStorage.getItem('tabProfessores');
 
-    $("#navs-professores button").click(function() {
-        sessionStorage.setItem('tabProfessores', $(this).data().bsTarget);
-    })
+        if (tab != null) {
+            $("[data-bs-target='" + tab + "']").addClass('active');
+            $(tab).addClass('show active');
+        }
+
+        $("#navs-professores button").click(function() {
+            sessionStorage.setItem('tabProfessores', $(this).data().bsTarget);
+        })
+
+        $('#professores').DataTable({
+            language: {
+                url: 'http://cdn.datatables.net/plug-ins/1.11.3/i18n/pt_br.json'
+            }
+        });
+    });
 </script>
 @endsection
 
@@ -32,7 +41,40 @@
 
         </div>
         <div class="tab-pane fade" id="ver-professores">
-
+            <section class="grupos col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped" id="professores">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Ativo</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($professores as $professor)
+                                <tr>
+                                    <th scope="row">{{$professor['nome']}}</th>
+                                    <td>{{$professor['email']}}</td>
+                                    <td scope="row">
+                                        @if ($professor['ativo'])
+                                        Ativo
+                                        @else
+                                        Inativo
+                                        @endif
+                                    </td>
+                                    <td>V</td>
+                                    <td>X</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
         </div>
         <div class="tab-pane fade row" id="novo-professor">
             <section class="grupos col-12">
