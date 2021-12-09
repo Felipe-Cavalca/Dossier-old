@@ -11,40 +11,40 @@
 @section('body')
 <section class="layout cima">
     <div class="row">
-        <div class="col-4">
+        <div class="col-4 nav-nome">
             <h3><i class="fas fa-user-circle"></i> Bem-vindo {{$nomeUsuario}}!</h3>
         </div>
 
-        <div class="folha1 col-4 ">
+        <div class="folha1 col-4 folhas">
             <p class="folha1"></p>
             <hr>
         </div>
 
-        <div class="folha1 col-4 ">
+        <div class="folha1 col-4 folhas">
             <p class="folha1"></p>
             <hr>
         </div>
 
-        <div class="col-4">
+        <div class="col-4 folhas">
         </div>
 
-        <div class="folha2 col-4 ">
+        <div class="folha2 col-4 folhas">
             <p class="folha2"></p>
             <hr>
         </div>
 
-        <div class="folha2 col-4 ">
+        <div class="folha2 col-4 folhas">
             <hr>
         </div>
 
-        <div class="col-4">
+        <div class="col-4 folhas">
         </div>
 
-        <div class="col-4">
+        <div class="col-4 folhas">
 
         </div>
 
-        <div class="col-4">
+        <div class="col-4 folhas">
         </div>
     </div>
 </section>

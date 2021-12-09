@@ -14,7 +14,15 @@ body{
     color: transparent;
     margin: 0%;
 }
-
+@media only screen and (max-width: 800px){
+    .folhas{
+        display: none;
+    }
+    .nav-nome{
+        width: 100%;
+        margin-top: 20px;
+    }
+}
 .centro{
     margin: auto;
     width: 50%;
