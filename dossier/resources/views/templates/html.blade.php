@@ -49,7 +49,7 @@
         setTimeout(function() {
             $('.conteudoHtml').show();
             $('.load').hide();
-        }, 500);
+        }, 200);
     </script>
     @yield('jsTemplate')
     @yield('js')
