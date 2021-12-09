@@ -15,7 +15,8 @@
         $('#arquivos').DataTable({
             language: {
                 url: 'http://cdn.datatables.net/plug-ins/1.11.3/i18n/pt_br.json'
-            }
+            },
+            "order": [[ 1, "desc" ]]
         });
 
         
@@ -53,6 +54,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Nome</th>
+                                    <th scope="col">Tipo</th>
                                     <th scope="col">Downloas/Entrar</th>
                                     <th scope="col">Excluir</th>
                                 </tr>
@@ -61,6 +63,7 @@
                                 @foreach ($arquivos as $arquivo)
                                 <tr>
                                     <th scope="row">{{$arquivo['nome']}}</th>
+                                    <th scope="row">{{$arquivo['tipo']}}</th>
                                     <td>
                                         @if ($arquivo['tipo'] == 'arquivo')
                                         <a href="{{ route('download') }}?id={{$arquivo['id']}}" target="_blank">
@@ -85,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="arquivos-recebidos">B</div>
+        <div class="tab-pane fade" id="arquivos-recebidos"></div>
         <div class="tab-pane fade" id="novo-arquivo">
             <div class="card">
                 <div class="card-body">
